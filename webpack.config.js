@@ -10,4 +10,12 @@ module.exports = {
     contentBase: './dist',
   },
   mode: 'development',
+  module: {
+    rules: [
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+    ],
+  },
 };
