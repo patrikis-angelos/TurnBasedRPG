@@ -1,4 +1,6 @@
 import 'phaser';
+import SceneButton from '../Objects/button';
+
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
@@ -6,9 +8,9 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   preload() {
-
   }
 
   create() {
+    new SceneButton(400, 300, 'start', this, 'Game', 3);
   }
 }
