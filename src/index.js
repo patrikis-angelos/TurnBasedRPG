@@ -1,7 +1,7 @@
 import 'phaser';
 import config from './Config/config';
 import boot from './Scenes/boot';
-import preloader from './Scenes/preloader';
+import preloader from './Scenes/Preloader/preloader';
 import title from './Scenes/title';
 import game from './Scenes/game';
 
