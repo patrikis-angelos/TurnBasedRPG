@@ -2,6 +2,8 @@ import 'phaser';
 import bar from './bar';
 import start from '../../assets/buttons/start.png';
 import start_hover from '../../assets/buttons/start-hover.png';
+import map from '../../assets/map/map.json';
+import field from '../../assets/map/spritesheet.png'
 
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
@@ -37,6 +39,8 @@ export default class PreloaderScene extends Phaser.Scene {
     // loading assets
     this.load.image('start', start);
     this.load.image('start_hover', start_hover);
+    this.load.tilemapTiledJSON('map', map);
+    this.load.image('field', field);
   }
 
   update() {
