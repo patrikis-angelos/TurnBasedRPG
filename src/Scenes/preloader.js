@@ -2,12 +2,11 @@ import 'phaser';
 import bar from '../Modules/bar';
 import start from '../assets/buttons/start.png';
 import start_hover from '../assets/buttons/start-hover.png';
-import map from '../assets/map/map.json';
-import field from '../assets/map/spritesheet.png';
-import rpg from '../assets/mapTest/RPG.json';
-import town from '../assets/mapTest/tiles-map.png';
-import transparent_town from '../assets/mapTest/transparent-bg-tiles.png';
+import rpg_map from '../assets/map/rpg_map.json';
+import town from '../assets/map/tiles-map.png';
+import transparent_town from '../assets/map/transparent-bg-tiles.png';
 import warrior from '../assets/characters/icon_01.png';
+import spider from '../assets/enemies/icon_29.png';
 
 
 export default class PreloaderScene extends Phaser.Scene {
@@ -44,12 +43,11 @@ export default class PreloaderScene extends Phaser.Scene {
     // loading assets
     this.load.image('start', start);
     this.load.image('start_hover', start_hover);
-    this.load.tilemapTiledJSON('map', map);
-    this.load.image('field', field);
     this.load.image('warrior', warrior);
     this.load.image('town', town);
+    this.load.tilemapTiledJSON('rpg_map', rpg_map);
     this.load.image('transparent_town', transparent_town);
-    this.load.tilemapTiledJSON('rpg', rpg);
+    this.load.image('spider', spider);
   }
 
   update() {
