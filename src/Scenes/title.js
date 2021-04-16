@@ -11,6 +11,7 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    const button = new SceneButton(400, 300, 'start', this, 'Game', 3);
+    const button = SceneButton('start', 'Game');
+    button.instantiate(400, 300, this, 3);
   }
 }

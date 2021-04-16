@@ -1,22 +1,25 @@
 import 'phaser';
-import Obj from './object';
 
-export default class SceneButton extends Obj {
-  constructor(x, y, name, scene, targetScene, scale = 1) {
-    super(x, y, name, scene, scale);
-    this.targetScene = targetScene;
-    this.button = this.instantiateInteractive();
+const SceneButton = (name, targetScene) => {
+  let button;
+  const instantiate = (startX, startY, scene, scale = 1) => {
+    button = scene.add.sprite(startX, startY, name).setInteractive();
+    button.setScale(scale)
 
-    this.button.on('pointerdown', function () {
+    button.on('pointerdown', function () {
       this.scene.scene.start(targetScene);
     });
 
-    this.button.on('pointerover', function () {
+    button.on('pointerover', function () {
       this.setTexture('start_hover');
     });
 
-    this.button.on('pointerout', function () {
+    button.on('pointerout', function () {
       this.setTexture('start');
     });
   }
+
+  return {instantiate};
 }
+
+export default SceneButton;
