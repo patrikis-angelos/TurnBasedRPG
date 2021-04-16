@@ -1,59 +1,60 @@
 import 'phaser';
+import Character from './character';
 
 const Player = (name, health, map) => {
-  let player;
   let cooldown = 7;
   let keyCooldown = cooldown;
-  let grid = 16;
+  let roundEnd = false;
 
-  const instantiate = (startX, startY, scene, scale = 1) => { 
-    player = scene.physics.add.sprite(startX, startY, name);
-    player.setScale(scale);
-  }
-
-  const getPlayerInstance = () => {
-    return player;
-  }
+  const {instantiate, getInstance, checkMove, makeMove} = Character(name, health)
 
   const updateCooldown = () => {
     keyCooldown += 1
   }
 
-  const checkMove = (map, x, y) => {
-    x = x/grid - 0.5;
-    y = y/grid - 0.5;
-    if (!map[y] || !map[y][x] || map[y][x].index > 0) {
-      return 0;
-    }
-    return grid;
+  const getRound = () => {
+    return roundEnd;
+  }
+
+  const setRound = (round) => {
+    roundEnd = round;
   }
 
   const move = (keys) => {
+    let grid = 16;
+    let player = getInstance();
     if (!player){
-      return;
+      return false;
     }
     if (keyCooldown >= cooldown) {
       if (keys.up.isDown) {
-        let step = checkMove(map, player.x, player.y - grid);
-        player.y -= step;
+        let step = checkMove(map, player.x, player.y - grid, grid);
+        makeMove('y', -step);
+        keyCooldown = 0;
+        roundEnd = true;
       }
       else if (keys.down.isDown) {
-        let step = checkMove(map, player.x, player.y + grid);
-        player.y += step;
+        let step = checkMove(map, player.x, player.y + grid, grid);
+        makeMove('y', step);
+        keyCooldown = 0;
+        roundEnd = true;
       }
       else if (keys.left.isDown) {
-        let step = checkMove(map, player.x - grid, player.y);
-        player.x -= step;
+        let step = checkMove(map, player.x - grid, player.y, grid);
+        makeMove('x', -step);
+        keyCooldown = 0;
+        roundEnd = true;
       }
       else if (keys.right.isDown) {
-        let step = checkMove(map, player.x + grid, player.y);
-        player.x += step;
+        let step = checkMove(map, player.x + grid, player.y, grid);
+        makeMove('x', step);
+        keyCooldown = 0;
+        roundEnd = true;
       }
-      keyCooldown = 0;
     }
   }
 
-  return {instantiate, move, updateCooldown, getPlayerInstance};
+  return {instantiate, move, updateCooldown, getInstance, getRound, setRound};
 };
 
 export default Player;
