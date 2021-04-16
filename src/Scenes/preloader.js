@@ -4,6 +4,9 @@ import start from '../assets/buttons/start.png';
 import start_hover from '../assets/buttons/start-hover.png';
 import map from '../assets/map/map.json';
 import field from '../assets/map/spritesheet.png';
+import rpg from '../assets/mapTest/RPG.json';
+import town from '../assets/mapTest/tiles-map.png';
+import transparent_town from '../assets/mapTest/transparent-bg-tiles.png';
 import warrior from '../assets/characters/icon_01.png';
 
 
@@ -44,6 +47,9 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.tilemapTiledJSON('map', map);
     this.load.image('field', field);
     this.load.image('warrior', warrior);
+    this.load.image('town', town);
+    this.load.image('transparent_town', transparent_town);
+    this.load.tilemapTiledJSON('rpg', rpg);
   }
 
   update() {

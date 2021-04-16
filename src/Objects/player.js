@@ -7,6 +7,7 @@ const Player = (name, map) => {
 
   const instantiate = (startX, startY, scene, scale = 1) => { 
     player = scene.physics.add.sprite(startX, startY, name);
+    player.setScale(scale);
   }
 
   const getPlayerInstance = () => {
