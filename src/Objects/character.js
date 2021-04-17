@@ -27,11 +27,8 @@ const Character = (name, health) => {
     if (!character){
       return false;
     }
-    if (direction === 'y') {
-      character.y += value;
-    } else if (direction === 'x') {
-      character.x += value;
-    }
+    character.y += direction[1]*value;
+    character.x += direction[0]*value;
     return true;
   }
 

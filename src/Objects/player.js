@@ -23,31 +23,35 @@ const Player = (name, health, map) => {
   const move = (keys) => {
     let grid = 16;
     let player = getInstance();
+    let moved = false;
+    let step;
+    let direction;
     if (!player){
       return false;
     }
     if (keyCooldown >= cooldown) {
       if (keys.up.isDown) {
-        let step = checkMove(map, player.x, player.y - grid, grid);
-        makeMove('y', -step);
-        keyCooldown = 0;
-        roundEnd = true;
+        step = checkMove(map, player.x, player.y - grid, grid);
+        direction = [0, -1];
+        moved = true;
       }
       else if (keys.down.isDown) {
-        let step = checkMove(map, player.x, player.y + grid, grid);
-        makeMove('y', step);
-        keyCooldown = 0;
-        roundEnd = true;
+        step = checkMove(map, player.x, player.y + grid, grid);
+        direction = [0, 1];
+        moved = true;
       }
       else if (keys.left.isDown) {
-        let step = checkMove(map, player.x - grid, player.y, grid);
-        makeMove('x', -step);
-        keyCooldown = 0;
-        roundEnd = true;
+        step = checkMove(map, player.x - grid, player.y, grid);
+        direction = [-1, 0];
+        moved = true;
       }
       else if (keys.right.isDown) {
-        let step = checkMove(map, player.x + grid, player.y, grid);
-        makeMove('x', step);
+        step = checkMove(map, player.x + grid, player.y, grid);
+        direction = [1, 0];
+        moved = true;
+      }
+      if (moved) {
+        makeMove(direction, step);
         keyCooldown = 0;
         roundEnd = true;
       }
