@@ -34,16 +34,30 @@ export default class GameScene extends Phaser.Scene {
     this.cameras.main.startFollow(player, false, 0.05, 0.05, 0, -50);
   }
 
+  startBattle(attacker, defender) {
+    console.log(`${attacker} attacks ${defender}`);
+  }
+
+  getEnemy(position) {
+    for (let i = 0; i < this.enemies.length; i += 1) {
+      let e = this.enemies[i].getInstance();
+      if (e.x === position[0]*16 + 8){
+        return this.enemies[i];
+      }
+    }
+  }
+
   preload() {
   }
 
   create() {
-    let map = this.createMap();
-    let tiles = map.layers[1].data;
+    this.battleCooldown = 0; 
+    let tiles = this.createMap();
+    this.map = tiles.layers[1].data;
 
     const staringX = 13*16 + 8;
     const staringY = 34*16 + 8;
-    this.player = Player('warrior', 100, tiles);
+    this.player = Player('warrior', 100, this.map);
     this.player.instantiate(staringX, staringY, this);
 
     let playerInstance = this.player.getInstance();
@@ -54,7 +68,7 @@ export default class GameScene extends Phaser.Scene {
     this.enemies = [];
     const spiderX = 13*16 + 8;
     const spiderY = 25*16 + 8;
-    const spider = Enemy ('spider', 20, tiles);
+    const spider = Enemy ('spider', 20, this.map);
     spider.instantiate(spiderX, spiderY, this);
     this.enemies.push(spider);
 
@@ -62,13 +76,27 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-    this.player.move(this.keys);
-    this.player.updateCooldown();
-    if (this.player.getRound()) {
-      this.player.setRound(false);
-      this.enemies.forEach((enemy) => {
-        enemy.move();
-      });
+    if (!this.battle) {
+      this.player.move(this.keys);
+      this.player.updateCooldown();
+      if (this.player.getRound()) {
+        this.player.setRound(false);
+        this.enemies.forEach((enemy) => {
+          enemy.move();
+        });
+      }
+      this.battle = this.player.checkSurroundings();
+      if (this.battle) {
+        this.enemy = this.getEnemy(this.battle);
+      }
+    } else {
+      this.battleCooldown += 1;
+      if (this.battleCooldown >= 60) {
+        this.startBattle('this.enemy', 'this.player');
+        this.battleCooldown = 0;
+      } else if (this.battleCooldown === 30) {
+        this.startBattle('this.player', 'this.enemy');
+      }
     }
   }
 }

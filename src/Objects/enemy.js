@@ -3,7 +3,7 @@ import Character from './character';
 
 const Enemy = (name, health, map) => {
   let directions = [[0, 1],[0, -1],[1, 0],[-1, 0]];
-  const {instantiate, getInstance, checkMove, makeMove, attack, takeDamage, getStats} = Character(name, health);
+  const {instantiate, getInstance, checkBlock, makeMove, attack, takeDamage, getStats} = Character(name, health, map);
 
   const move = () => {
     randomMove();
@@ -16,7 +16,7 @@ const Enemy = (name, health, map) => {
     directions.forEach((dir) => {
       let nextX = enemy.x + step*dir[0];
       let nextY = enemy.y + step*dir[1];
-      if (checkMove(map, nextX, nextY) > 0) {
+      if (checkBlock(nextX, nextY)) {
         available.push(dir);
       }
     });
