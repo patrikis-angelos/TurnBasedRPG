@@ -32,9 +32,10 @@ export default class GameScene extends Phaser.Scene {
   }
 
   create() {
+    this.scene.launch('UIScene');
     this.following = true;
     this.cameras.main.setZoom(2);
-    this.cameras.main.setBounds(0, 0, 400, 608);
+    this.cameras.main.setBounds(0, 0, 400, 708);
     let map = this.createMap();
     this.tiles = map.layers[1].data;
 
@@ -43,7 +44,7 @@ export default class GameScene extends Phaser.Scene {
     const staringY = 34*16 + 8;
     this.player.instantiate(staringX, staringY, this);
     let p = this.player.getInstance();
-    this.cameras.main.startFollow(p, false, 0.05, 0.05);
+    this.cameras.main.startFollow(p, false, 0.05, 0.05, 0, -50);
     this.movementKeys();
 
     this.enemies = [];
