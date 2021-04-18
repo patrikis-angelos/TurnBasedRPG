@@ -32,7 +32,19 @@ const Character = (name, health) => {
     return true;
   }
 
-  return {instantiate, getInstance, checkMove, makeMove};
+  const getStats = () => {
+    return [name, health];
+  }
+
+  const attack = (target, damage) => {
+    target.takeDamage(damage);
+  }
+
+  const takeDamage = (damage) => {
+    health -= damage;
+  }
+
+  return {instantiate, getInstance, checkMove, makeMove, attack, takeDamage, getStats};
 }
 
 export default Character;

@@ -28,31 +28,37 @@ export default class GameScene extends Phaser.Scene {
     return map;
   }
 
+  setCamera(player) {
+    this.cameras.main.setZoom(2);
+    this.cameras.main.setBounds(0, 0, 400, 708);
+    this.cameras.main.startFollow(player, false, 0.05, 0.05, 0, -50);
+  }
+
   preload() {
   }
 
   create() {
-    this.scene.launch('UIScene');
-    this.following = true;
-    this.cameras.main.setZoom(2);
-    this.cameras.main.setBounds(0, 0, 400, 708);
     let map = this.createMap();
-    this.tiles = map.layers[1].data;
+    let tiles = map.layers[1].data;
 
-    this.player = Player('warrior', 100, this.tiles);
     const staringX = 13*16 + 8;
     const staringY = 34*16 + 8;
+    this.player = Player('warrior', 100, tiles);
     this.player.instantiate(staringX, staringY, this);
-    let p = this.player.getInstance();
-    this.cameras.main.startFollow(p, false, 0.05, 0.05, 0, -50);
+
+    let playerInstance = this.player.getInstance();
+    this.setCamera(playerInstance);
+
     this.movementKeys();
 
     this.enemies = [];
     const spiderX = 13*16 + 8;
     const spiderY = 25*16 + 8;
-    const spider = Enemy ('spider', 20, this.tiles);
+    const spider = Enemy ('spider', 20, tiles);
     spider.instantiate(spiderX, spiderY, this);
     this.enemies.push(spider);
+
+    this.scene.launch('UIScene', {player: this.player});
   }
 
   update() {

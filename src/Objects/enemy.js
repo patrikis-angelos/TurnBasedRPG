@@ -3,7 +3,7 @@ import Character from './character';
 
 const Enemy = (name, health, map) => {
   let directions = [[0, 1],[0, -1],[1, 0],[-1, 0]];
-  const {instantiate, getInstance, checkMove, makeMove} = Character(name, health);
+  const {instantiate, getInstance, checkMove, makeMove, attack, takeDamage, getStats} = Character(name, health);
 
   const move = () => {
     randomMove();
@@ -25,7 +25,7 @@ const Enemy = (name, health, map) => {
     makeMove(nextMove, step);
   }
 
-  return {instantiate, getInstance, move};
+  return {instantiate, getInstance, move, attack, takeDamage, getStats};
 }
 
 export default Enemy;

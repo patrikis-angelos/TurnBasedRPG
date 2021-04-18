@@ -6,7 +6,7 @@ const Player = (name, health, map) => {
   let keyCooldown = cooldown;
   let roundEnd = false;
 
-  const {instantiate, getInstance, checkMove, makeMove} = Character(name, health)
+  const {instantiate, getInstance, checkMove, makeMove, getStats, takeDamage} = Character(name, health)
 
   const updateCooldown = () => {
     keyCooldown += 1
@@ -58,7 +58,7 @@ const Player = (name, health, map) => {
     }
   }
 
-  return {instantiate, move, updateCooldown, getInstance, getRound, setRound};
+  return {instantiate, move, updateCooldown, getInstance, getRound, setRound, getStats, takeDamage};
 };
 
 export default Player;
