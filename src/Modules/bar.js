@@ -4,7 +4,7 @@ const barModule = (() => {
       percentText.setText(parseInt(value * 100) + '%');
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
-      progressBar.fillRect(250, 280, 300 * value, 30);
+      progressBar.fillRect(250, 400, 300 * value, 30);
     });
   }
 

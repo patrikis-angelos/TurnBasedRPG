@@ -1,12 +1,14 @@
 import 'phaser';
 
-const Character = (name, health, map) => {
+const Character = (name, health, attack, defence, map) => {
   let character;
   let grid = 16;
+  let active;
 
   const instantiate = (startX, startY, scene, scale = 1) => { 
     character = scene.physics.add.sprite(startX, startY, name);
     character.setScale(scale);
+    active = true;
   }
 
   const getInstance = () => {
@@ -14,6 +16,9 @@ const Character = (name, health, map) => {
   }
 
   const updatePosition = (x, y, direction) => {
+    if (!active) {
+      return;
+    }
     x = x/grid - 0.5;
     y = y/grid - 0.5;
     map[y][x].occupied = false;
@@ -21,8 +26,9 @@ const Character = (name, health, map) => {
   }
 
   const checkBlock = (x, y) => {
-    x = x/grid - 0.5;
-    y = y/grid - 0.5;
+    if (!active) {
+      return;
+    }
     if (!map[y] || !map[y][x] || map[y][x].index > 0) {
       return false;
     }
@@ -40,18 +46,53 @@ const Character = (name, health, map) => {
   }
 
   const getStats = () => {
-    return [name, health];
+    return {name, health};
   }
 
-  const attack = (target, damage) => {
-    target.takeDamage(damage);
+  const getHealth = () => {
+    return health;
+  }
+
+  const getActive = () => {
+    return active;
+  }
+
+  const attackTarget = (target) => {
+    if (!active) {
+      return;
+    }
+    target.takeDamage(attack);
   }
 
   const takeDamage = (damage) => {
-    health -= damage;
+    if (!active) {
+      return;
+    }
+    health = health - damage + defence;
   }
 
-  return {instantiate, getInstance, checkBlock, makeMove, attack, takeDamage, getStats};
+  const die = () => {
+    if (!active) {
+      return;
+    }
+    if (health <= 0) {
+      character.setActive(false).setVisible(false);
+      active = false;
+      return true;
+    }
+    return false;
+  }
+
+  return {instantiate, 
+    getInstance, 
+    checkBlock, 
+    makeMove, 
+    attackTarget, 
+    takeDamage, 
+    getStats, 
+    getHealth,
+    die,
+    getActive};
 }
 
 export default Character;

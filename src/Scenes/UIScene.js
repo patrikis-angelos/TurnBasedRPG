@@ -7,8 +7,7 @@ export default class UIScene extends Phaser.Scene {
 
   init(data) {
     this.player = data.player
-    let test = this.player.getStats();
-    [this.name, this.health] = test;
+    this.test = this.player.getStats();
     this.p = this.player.getInstance();
   }
 
@@ -31,7 +30,7 @@ export default class UIScene extends Phaser.Scene {
     healthText.setScale(1.5);
 
     this.graphics.lineStyle(5, 0x000000);
-    let persentage = this.health/100;
+    let persentage = this.test.health/100;
     this.graphics.strokeRect(x, y + margin, w, h);
     let rect = this.add.rectangle(x + 2.5,y + margin + 2.5, (w - 5)*persentage, h - 5, color).setOrigin(0, 0);
     return rect;
@@ -50,8 +49,6 @@ export default class UIScene extends Phaser.Scene {
     this.createField(20, uiStartY + 70, 'Score', 0);
     this.createField(430, uiStartY + 10, 'Attack', 0);
     this.createField(430, uiStartY + 40, 'Defence', 0);
-    this.createField(430, uiStartY + 70, 'Movement Speed', 0);
-    this.createField(430, uiStartY + 100, 'Regen', 0);
   }
 
   update() {

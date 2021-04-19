@@ -1,12 +1,21 @@
 import 'phaser';
 import Character from './character';
 
-const Player = (name, health, map) => {
+const Player = (name, health, attack, defence, map) => {
   let cooldown = 7;
   let keyCooldown = cooldown;
   let roundEnd = false;
+  let active = true;  
 
-  const {instantiate, getInstance, checkBlock, makeMove, getStats, takeDamage} = Character(name, health, map)
+  const {instantiate, 
+    getInstance, 
+    checkBlock, 
+    makeMove, 
+    getStats, 
+    attackTarget, 
+    takeDamage, 
+    getHealth,
+    die} = Character(name, health, attack, defence, map)
 
   const updateCooldown = () => {
     keyCooldown += 1
@@ -27,10 +36,11 @@ const Player = (name, health, map) => {
     let directions = [[0, 1], [0, -1], [1, 0], [-1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]];
     for (let i = 0; i < directions.length; i += 1) {
       let direction = directions[i];
-      if (checkBlock(player.x + 16*direction[0], player.y + 16*direction[1]) && 
-      map[y + direction[1]][x + direction[0]].occupied) 
+      let targetX = x + direction[0];
+      let targetY = y + direction[1];
+      if (checkBlock(targetX, targetY) && map[targetY][targetX].occupied) 
       {
-        return [x + direction[0], y + direction[1]];
+        return [targetX, targetY];
       }
     }
     return false;
@@ -46,23 +56,25 @@ const Player = (name, health, map) => {
       return false;
     }
     if (keyCooldown >= cooldown) {
+      let x = player.x/step - 0.5;
+      let y = player.y/step - 0.5;
       if (keys.up.isDown) {
-        availiable = checkBlock(player.x, player.y - step, step);
+        availiable = checkBlock(x, y - 1, step);
         direction = [0, -1];
         moved = true;
       }
       else if (keys.down.isDown) {
-        availiable = checkBlock(player.x, player.y + step, step);
+        availiable = checkBlock(x, y + 1, step);
         direction = [0, 1];
         moved = true;
       }
       else if (keys.left.isDown) {
-        availiable = checkBlock(player.x - step, player.y, step);
+        availiable = checkBlock(x - 1, y, step);
         direction = [-1, 0];
         moved = true;
       }
       else if (keys.right.isDown) {
-        availiable = checkBlock(player.x + step, player.y, step);
+        availiable = checkBlock(x + 1, y, step);
         direction = [1, 0];
         moved = true;
       }
@@ -74,7 +86,18 @@ const Player = (name, health, map) => {
     }
   }
 
-  return {instantiate, move, updateCooldown, getInstance, getRound, setRound, getStats, takeDamage, checkSurroundings};
+  return {instantiate, 
+    move, 
+    updateCooldown, 
+    getInstance, 
+    getRound, 
+    setRound, 
+    getStats, 
+    attackTarget, 
+    takeDamage, 
+    checkSurroundings,
+    getHealth,
+    die};
 };
 
 export default Player;
