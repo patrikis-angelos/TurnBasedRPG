@@ -7,9 +7,6 @@ export default class TitleScene extends Phaser.Scene {
     super('Title');
   }
 
-  preload() {
-  }
-
   create() {
     const button = SceneButton('start', 'Game');
     button.instantiate(400, 300, this, 3);

@@ -7,7 +7,6 @@ export default class UIScene extends Phaser.Scene {
 
   init(data) {
     this.player = data.player
-    this.test = this.player.getStats();
     this.p = this.player.getInstance();
   }
 
@@ -35,8 +34,8 @@ export default class UIScene extends Phaser.Scene {
     this.rect = this.player.createHealthBar(this, 20, uiStartY + 10, 380, 20, 0xff0000);
 
     this.scoreText = this.createField(20, uiStartY + 70, 'Score', 0);
-    this.createField(430, uiStartY + 10, 'Attack', 0);
-    this.createField(430, uiStartY + 40, 'Defence', 0);
+    this.createField(430, uiStartY + 10, 'Attack', this.player.getAttack());
+    this.createField(430, uiStartY + 40, 'Defence', this.player.getDefence());
   }
 
   update() {

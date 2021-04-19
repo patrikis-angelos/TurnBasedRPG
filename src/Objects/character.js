@@ -45,16 +45,20 @@ const Character = (name, health, attack, defence, map) => {
     return true;
   }
 
-  const getStats = () => {
-    return {name, health};
-  }
-
   const getHealth = () => {
     return health;
   }
 
   const getActive = () => {
     return active;
+  }
+
+  const getAttack = () => {
+    return attack;
+  }
+
+  const getDefence = () => {
+    return defence;
   }
 
   const attackTarget = (target) => {
@@ -89,7 +93,8 @@ const Character = (name, health, attack, defence, map) => {
     makeMove, 
     attackTarget, 
     takeDamage, 
-    getStats, 
+    getAttack,
+    getDefence, 
     getHealth,
     die,
     getActive};

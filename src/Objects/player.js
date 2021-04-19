@@ -3,7 +3,7 @@ import Character from './character';
 
 const Player = (name, health, attack, defence, map) => {
   let cooldown = 7;
-  let keyCooldown = cooldown;
+  let movementCooldown = cooldown;
   let roundEnd = false;
   let healthBar;
   let score = 0;
@@ -12,14 +12,16 @@ const Player = (name, health, attack, defence, map) => {
     getInstance, 
     checkBlock, 
     makeMove, 
-    getStats, 
+    getAttack,
+    getDefence,  
     attackTarget, 
     takeDamage, 
     getHealth,
-    die} = Character(name, health, attack, defence, map)
+    die,
+    getActive} = Character(name, health, attack, defence, map)
 
   const updateCooldown = () => {
-    keyCooldown += 1
+    movementCooldown += 1
   }
 
   const getRound = () => {
@@ -64,7 +66,7 @@ const Player = (name, health, attack, defence, map) => {
     if (!player){
       return false;
     }
-    if (keyCooldown >= cooldown) {
+    if (movementCooldown >= cooldown) {
       let x = player.x/step - 0.5;
       let y = player.y/step - 0.5;
       if (keys.up.isDown) {
@@ -89,7 +91,7 @@ const Player = (name, health, attack, defence, map) => {
       }
       if (moved && availiable) {
         makeMove(direction, step);
-        keyCooldown = 0;
+        movementCooldown = 0;
         roundEnd = true;
       }
     }
@@ -101,7 +103,7 @@ const Player = (name, health, attack, defence, map) => {
     healthText.setScale(1.5);
 
     scene.graphics.lineStyle(5, 0x000000);
-    let persentage = scene.test.health/100;
+    let persentage = getHealth()/100;
     scene.graphics.strokeRect(x, y + margin, w, h);
     healthBar = scene.add.rectangle(x + 2.5,y + margin + 2.5, (w - 5)*persentage, h - 5, color).setOrigin(0, 0);
     return healthBar;
@@ -119,7 +121,8 @@ const Player = (name, health, attack, defence, map) => {
     getInstance, 
     getRound, 
     setRound, 
-    getStats, 
+    getAttack,
+    getDefence,
     attackTarget, 
     takeDamage, 
     checkSurroundings,
@@ -128,7 +131,8 @@ const Player = (name, health, attack, defence, map) => {
     createHealthBar,
     updateHealthBar,
     getScore,
-    updateScore};
+    updateScore,
+    getActive};
 };
 
 export default Player;

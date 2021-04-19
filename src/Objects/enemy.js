@@ -10,7 +10,8 @@ const Enemy = (name, health, attack, defence, map) => {
     makeMove, 
     attackTarget, 
     takeDamage, 
-    getStats, 
+    getAttack,
+    getDefence, 
     getHealth,
     die, 
     getActive} = Character(name, health, attack, defence, map);
@@ -36,7 +37,9 @@ const Enemy = (name, health, attack, defence, map) => {
     });
     let index = Math.floor(Math.random()*available.length)
     let nextMove = available[index];
-    makeMove(nextMove, step);
+    if (nextMove) {
+      makeMove(nextMove, step);
+    }
   }
 
   const createHealth = (scene) => {
@@ -65,7 +68,8 @@ const Enemy = (name, health, attack, defence, map) => {
     move, 
     attackTarget, 
     takeDamage, 
-    getStats, 
+    getAttack,
+    getDefence,
     createHealth, 
     updateHealthBar,
     die,
