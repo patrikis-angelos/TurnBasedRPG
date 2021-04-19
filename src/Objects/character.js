@@ -29,7 +29,7 @@ const Character = (name, health, attack, defence, map) => {
     if (!active) {
       return;
     }
-    if (!map[y] || !map[y][x] || map[y][x].index > 0) {
+    if (!map[y] || !map[y][x] || map[y][x].index > 0 || map[y][x].occupied) {
       return false;
     }
     return true;

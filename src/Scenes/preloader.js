@@ -7,6 +7,7 @@ import town from '../assets/map/tiles-map.png';
 import transparent_town from '../assets/map/transparent-bg-tiles.png';
 import warrior from '../assets/characters/icon_01.png';
 import spider from '../assets/enemies/icon_29.png';
+import coin from '../assets/icon_306.png';
 
 
 export default class PreloaderScene extends Phaser.Scene {
@@ -48,6 +49,7 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.tilemapTiledJSON('rpg_map', rpg_map);
     this.load.image('transparent_town', transparent_town);
     this.load.image('spider', spider);
+    this.load.image('coin', coin);
   }
 
   update() {

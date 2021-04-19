@@ -30,16 +30,14 @@ export default class GameScene extends Phaser.Scene {
 
   setCamera(player) {
     this.cameras.main.setZoom(2);
-    this.cameras.main.setBounds(0, 0, 400, 708);
+    this.cameras.main.setBounds(0, 0, 400, 658);
     this.cameras.main.startFollow(player, false, 0.05, 0.05, 0, -50);
   }
 
   startBattle(attacker, defender) {
     attacker.attackTarget(defender);
-    let stats = defender.getStats();
-    if (stats.name !== 'warrior') {
-      defender.updateHealthBar();
-    }
+    defender.updateHealthBar(this);
+    console.log(defender.getHealth());
     if (defender.die()) {
       this.map[this.battle[1]][this.battle[0]].occupied = false;
       this.battle = false;
@@ -55,6 +53,40 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
+  collectCoin(coin) {
+    this.player.updateScore();
+    let position = this.pickRandomLocation();
+    coin.x = position.x;
+    coin.y = position.y;
+    position = this.pickRandomLocation();
+    this.createSpider(position.x, position.y, 20, 5, 1);
+  }
+
+  pickRandomLocation() {
+    let location = false;
+    let mapHeight = this.map.length;
+    let mapWidth = this.map[0].length;
+    let x;
+    let y;
+    while (!location) {
+      let rndX = Math.floor(Math.random()*mapWidth);
+      let rndY = Math.floor(Math.random()*mapHeight);
+      if (this.map[rndY] && this.map[rndY][rndX] && this.map[rndY][rndX].index === -1 && !this.map[rndY][rndX].occupied) {
+        location = true;
+        x = rndX*16 + 8;
+        y = rndY*16 + 8;
+      }
+    }
+    return {x, y};
+  }
+
+  createSpider(x, y, health, attack, defence) {
+    const spider = Enemy ('spider', health, attack, defence, this.map);
+    spider.instantiate(x, y, this);
+    this.enemies.push(spider);
+    spider.createHealth(this);
+  }
+
   create() {
     this.graphics = this.add.graphics();
     this.battleCooldown = 0; 
@@ -67,6 +99,7 @@ export default class GameScene extends Phaser.Scene {
     this.player.instantiate(staringX, staringY, this);
 
     let playerInstance = this.player.getInstance();
+    playerInstance.setDepth(2);
     this.setCamera(playerInstance);
 
     this.movementKeys();
@@ -75,15 +108,10 @@ export default class GameScene extends Phaser.Scene {
     const spiderX = 13*16 + 8;
     const spiderY = 25*16 + 8;
 
-    const spider = Enemy ('spider', 20, 3, 1, this.map);
-    spider.instantiate(spiderX, spiderY, this);
-    this.enemies.push(spider);
-    spider.createHealth(this);
+    this.createSpider(spiderX, spiderY, 20, 5, 1);
 
-    const spider2 = Enemy('spider', 20, 3, 1, this.map);
-    spider2.instantiate(spiderX + 16, spiderY + 16, this);
-    this.enemies.push(spider2);
-    spider2.createHealth(this);
+    const coin = this.physics.add.sprite(8, 8, 'coin');
+    this.physics.add.overlap(playerInstance, coin, this.collectCoin.bind(this, coin), null, this);
 
     this.scene.launch('UIScene', {player: this.player});
   }
@@ -100,6 +128,8 @@ export default class GameScene extends Phaser.Scene {
       }
       this.battle = this.player.checkSurroundings();
       if (this.battle) {
+        this.battleCooldown = 0;
+        this.playerAttack = false;
         this.enemy = this.getEnemy(this.battle);
       }
     } else {
@@ -107,8 +137,12 @@ export default class GameScene extends Phaser.Scene {
       if (this.battleCooldown >= 60) {
         this.startBattle(this.enemy, this.player);
         this.battleCooldown = 0;
-      } else if (this.battleCooldown === 30) {
-        this.startBattle(this.player, this.enemy);
+        this.playerAttack = false;
+      } else if (this.battleCooldown >= 30) {
+        if (!this.playerAttack) {
+          this.startBattle(this.player, this.enemy);
+          this.playerAttack = true;
+        }
       }
     }
   }

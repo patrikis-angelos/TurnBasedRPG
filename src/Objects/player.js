@@ -5,7 +5,8 @@ const Player = (name, health, attack, defence, map) => {
   let cooldown = 7;
   let keyCooldown = cooldown;
   let roundEnd = false;
-  let active = true;  
+  let healthBar;
+  let score = 0;
 
   const {instantiate, 
     getInstance, 
@@ -29,6 +30,14 @@ const Player = (name, health, attack, defence, map) => {
     roundEnd = round;
   }
 
+  const getScore = () => {
+    return score;
+  }
+
+  const updateScore = () => {
+    score += 1;
+  }
+
   const checkSurroundings = () => {
     let player = getInstance();
     let x = player.x/16 - 0.5;
@@ -38,7 +47,7 @@ const Player = (name, health, attack, defence, map) => {
       let direction = directions[i];
       let targetX = x + direction[0];
       let targetY = y + direction[1];
-      if (checkBlock(targetX, targetY) && map[targetY][targetX].occupied) 
+      if (map[targetY] && map[targetY][targetX] && map[targetY][targetX].occupied) 
       {
         return [targetX, targetY];
       }
@@ -86,6 +95,24 @@ const Player = (name, health, attack, defence, map) => {
     }
   }
 
+  const createHealthBar = (scene, x, y, w, h, color) => {
+    let margin = 30;
+    let healthText = scene.add.text(x, y, 'Health');
+    healthText.setScale(1.5);
+
+    scene.graphics.lineStyle(5, 0x000000);
+    let persentage = scene.test.health/100;
+    scene.graphics.strokeRect(x, y + margin, w, h);
+    healthBar = scene.add.rectangle(x + 2.5,y + margin + 2.5, (w - 5)*persentage, h - 5, color).setOrigin(0, 0);
+    return healthBar;
+  }
+
+  const updateHealthBar = (scene) => {
+    let health = getHealth();
+    let percentage = health/100;
+    healthBar.setSize(percentage*380 - 5, 15);
+  }
+
   return {instantiate, 
     move, 
     updateCooldown, 
@@ -97,7 +124,11 @@ const Player = (name, health, attack, defence, map) => {
     takeDamage, 
     checkSurroundings,
     getHealth,
-    die};
+    die,
+    createHealthBar,
+    updateHealthBar,
+    getScore,
+    updateScore};
 };
 
 export default Player;

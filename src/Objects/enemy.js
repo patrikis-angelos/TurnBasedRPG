@@ -68,7 +68,8 @@ const Enemy = (name, health, attack, defence, map) => {
     getStats, 
     createHealth, 
     updateHealthBar,
-    die};
+    die,
+    getHealth};
 }
 
 export default Enemy;
