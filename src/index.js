@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import config from './Config/config';
 import boot from './Scenes/boot';
 import preloader from './Scenes/preloader';

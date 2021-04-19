@@ -1,5 +1,4 @@
 const gameLoop = (() => {
-
   const movement = (scene) => {
     scene.player.move(scene.keys);
     scene.player.updateCooldown();
@@ -9,10 +8,9 @@ const gameLoop = (() => {
         enemy.move();
       });
     }
-  }
+  };
 
-  return {movement};
-
+  return { movement };
 })();
 
 export default gameLoop;

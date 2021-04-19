@@ -1,9 +1,10 @@
+import Phaser from 'phaser';
 import bar from '../Modules/bar';
 import start from '../assets/buttons/button.png';
-import start_hover from '../assets/buttons/button_hover.png';
-import rpg_map from '../assets/map/rpg_map.json';
+import startHover from '../assets/buttons/button_hover.png';
+import rpgMap from '../assets/map/rpg_map.json';
 import town from '../assets/map/tiles-map.png';
-import transparent_town from '../assets/map/transparent-bg-tiles.png';
+import transparentTown from '../assets/map/transparent-bg-tiles.png';
 import warrior from '../assets/characters/icon_01.png';
 import spider from '../assets/enemies/icon_29.png';
 import coin from '../assets/icon_306.png';
@@ -29,25 +30,25 @@ export default class PreloaderScene extends Phaser.Scene {
   preload() {
     this.add.image(400, 200, 'logo');
 
-    let progressBar = this.add.graphics();
-    let progressBox = bar.displayBox(this);
-    
-    let width = this.cameras.main.width;
-    let loadingText = bar.displayText(this, width, 380, 'Loading...', 20);
-    let percentText = bar.displayText(this, width, 425, '0%', 18);
-    let assetText = bar.displayText(this, width, 470, '', 18);
-    
+    const progressBar = this.add.graphics();
+    const progressBox = bar.displayBox(this);
+
+    const { width } = this.cameras.main;
+    const loadingText = bar.displayText(this, width, 380, 'Loading...', 20);
+    const percentText = bar.displayText(this, width, 425, '0%', 18);
+    const assetText = bar.displayText(this, width, 470, '', 18);
+
     bar.updateBar(this, percentText, progressBar);
     bar.updateText(this, assetText);
     bar.removeBar(this, progressBar, progressBox, loadingText, percentText, assetText);
 
     // loading assets
     this.load.image('start', start);
-    this.load.image('start_hover', start_hover);
+    this.load.image('start_hover', startHover);
     this.load.image('warrior', warrior);
     this.load.image('town', town);
-    this.load.tilemapTiledJSON('rpg_map', rpg_map);
-    this.load.image('transparent_town', transparent_town);
+    this.load.tilemapTiledJSON('rpg_map', rpgMap);
+    this.load.image('transparent_town', transparentTown);
     this.load.image('spider', spider);
     this.load.image('coin', coin);
   }

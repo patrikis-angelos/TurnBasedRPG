@@ -1,3 +1,4 @@
+import Phaser from 'phaser';
 import '../Objects/player';
 import map from '../Modules/map';
 import camera from '../Modules/camera';
@@ -11,15 +12,15 @@ export default class GameScene extends Phaser.Scene {
   }
 
   init() {
-    this.battleCooldown = 0; 
+    this.battleCooldown = 0;
   }
 
   movementKeys() {
     this.keys = this.input.keyboard.addKeys({
-      'up': Phaser.Input.Keyboard.KeyCodes.W,
-      'down': Phaser.Input.Keyboard.KeyCodes.S,
-      'left': Phaser.Input.Keyboard.KeyCodes.A,
-      'right': Phaser.Input.Keyboard.KeyCodes.D,
+      up: Phaser.Input.Keyboard.KeyCodes.W,
+      down: Phaser.Input.Keyboard.KeyCodes.S,
+      left: Phaser.Input.Keyboard.KeyCodes.A,
+      right: Phaser.Input.Keyboard.KeyCodes.D,
     });
   }
 
@@ -44,11 +45,11 @@ export default class GameScene extends Phaser.Scene {
   create() {
     form.removeForm();
     this.graphics = this.add.graphics();
-    let tiles = map.createMap(this);
+    const tiles = map.createMap(this);
     this.map = tiles.layers[1].data;
 
     this.player = gameModule.createPlayer(100, 5, 2, this);
-    let playerInstance = this.player.getInstance();
+    const playerInstance = this.player.getInstance();
     playerInstance.setDepth(2);
 
     camera.setCamera(playerInstance, this);
@@ -61,9 +62,13 @@ export default class GameScene extends Phaser.Scene {
 
     const coinPosition = gameModule.pickRandomLocation(this);
     const coin = this.physics.add.sprite(coinPosition.x, coinPosition.y, 'coin');
-    this.physics.add.overlap(playerInstance, coin, gameModule.collectCoin.bind(this, coin, this), null, this);
+    this.physics.add.overlap(
+      playerInstance,
+      coin,
+      gameModule.collectCoin.bind(this, coin, this), null, this,
+    );
 
-    this.scene.launch('UIScene', {player: this.player});
+    this.scene.launch('UIScene', { player: this.player });
   }
 
   update() {
@@ -77,7 +82,7 @@ export default class GameScene extends Phaser.Scene {
       this.battleCooldown += 1;
       if (this.battleCooldown >= 30) {
         this.enemyTurn();
-        //Checking if player died after the enemy attack
+        // Checking if player died after the enemy attack
         if (!this.player.getActive()) {
           this.scene.stop('UIScene');
           this.scene.start('Score');

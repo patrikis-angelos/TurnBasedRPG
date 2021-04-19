@@ -1,10 +1,14 @@
 const form = (() => {
+  const submitForm = () => {
+
+  };
+
   const createForm = () => {
-    let body = document.querySelector('body');
-    let form = document.createElement('form');
+    const body = document.querySelector('body');
+    const form = document.createElement('form');
     form.id = 'form';
     form.classList.add('form');
-    let input = document.createElement('input');
+    const input = document.createElement('input');
     input.id = 'name';
     input.type = 'text';
     const submit = document.createElement('input');
@@ -17,18 +21,14 @@ const form = (() => {
     form.appendChild(submit);
     form.appendChild(input);
     body.appendChild(form);
-  }
+  };
 
   const removeForm = () => {
     const form = document.querySelector('form');
     form.remove();
-  }
+  };
 
-  const submitForm = () => {
-
-  }
-
-  return {createForm, removeForm};
+  return { createForm, removeForm };
 })();
 
 export default form;

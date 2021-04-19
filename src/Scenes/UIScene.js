@@ -1,30 +1,32 @@
+import Phaser from 'phaser';
+
 export default class UIScene extends Phaser.Scene {
   constructor() {
     super('UIScene');
   }
 
   init(data) {
-    this.player = data.player
+    this.player = data.player;
     this.p = this.player.getInstance();
   }
 
   createUI(x, y, w, h) {
-    this.graphics.fillStyle(0x031f4c, 1); 
+    this.graphics.fillStyle(0x031f4c, 1);
     this.graphics.lineStyle(5, 0x000000);
     this.graphics.fillRect(x, y, w - 5, h - 5);
     this.graphics.strokeRect(x + 5, y + 2.5, 800 - 7.5, h - 5);
   }
 
-  createField( x, y, name, value) {
-    let text = this.add.text(x, y, `${name}: ${value}`);
+  createField(x, y, name, value) {
+    const text = this.add.text(x, y, `${name}: ${value}`);
     text.setScale(1.5);
     return text;
   }
 
   create() {
-    let canvasHeight = this.sys.game.canvas.height;
-    let uiHeight = 100;
-    let uiStartY = canvasHeight - uiHeight;
+    const canvasHeight = this.sys.game.canvas.height;
+    const uiHeight = 100;
+    const uiStartY = canvasHeight - uiHeight;
     this.graphics = this.add.graphics();
 
     this.createUI(0, uiStartY, 800, uiHeight);
@@ -37,7 +39,7 @@ export default class UIScene extends Phaser.Scene {
   }
 
   update() {
-    let score = this.player.getScore();
-    this.scoreText.setText(`Score: ${score}`)
+    const score = this.player.getScore();
+    this.scoreText.setText(`Score: ${score}`);
   }
 }

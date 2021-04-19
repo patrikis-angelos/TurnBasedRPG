@@ -31,10 +31,12 @@
     "eslint-plugin-import": "^2.20.2",
     "html-webpack-plugin": "^5.3.1",
     "jest": "^26.6.3",
-    "phaser": "^3.54.0",
     "style-loader": "^2.0.0",
     "webpack": "^5.33.2",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "phaser": "^3.54.0"
   }
 }
