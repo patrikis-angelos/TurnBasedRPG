@@ -1,4 +1,3 @@
-import 'phaser';
 import Character from './character';
 
 const Enemy = (name, health, attack, defence, map) => {

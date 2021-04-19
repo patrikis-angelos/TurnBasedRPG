@@ -1,5 +1,3 @@
-import 'phaser';
-
 const gameLoop = (() => {
 
   const movement = (scene) => {

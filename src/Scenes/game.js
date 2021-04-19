@@ -1,9 +1,9 @@
-import 'phaser';
 import '../Objects/player';
 import map from '../Modules/map';
 import camera from '../Modules/camera';
 import gameModule from '../Modules/game';
 import gameLoop from '../Modules/gameLoop';
+import form from '../Modules/form';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -40,7 +40,9 @@ export default class GameScene extends Phaser.Scene {
     this.playerAttack = true;
   }
 
+
   create() {
+    form.removeForm();
     this.graphics = this.add.graphics();
     let tiles = map.createMap(this);
     this.map = tiles.layers[1].data;
@@ -75,6 +77,11 @@ export default class GameScene extends Phaser.Scene {
       this.battleCooldown += 1;
       if (this.battleCooldown >= 30) {
         this.enemyTurn();
+        //Checking if player died after the enemy attack
+        if (!this.player.getActive()) {
+          this.scene.stop('UIScene');
+          this.scene.start('Score');
+        }
       } else if (this.battleCooldown >= 15 && !this.playerAttack) {
         this.playerTurn();
       }

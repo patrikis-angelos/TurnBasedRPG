@@ -1,4 +1,3 @@
-import 'phaser';
 import Character from './character';
 
 const Player = (name, health, attack, defence, map) => {

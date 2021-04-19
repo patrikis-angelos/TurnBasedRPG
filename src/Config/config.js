@@ -1,5 +1,3 @@
-import 'phaser';
-
 export default {
   type: Phaser.AUTO,
   width: 800,
@@ -10,5 +8,5 @@ export default {
     arcade: {
       gravity: { y: 0 }
     }
-  },
+  }
 }

@@ -1,5 +1,3 @@
-import 'phaser';
-
 const Character = (name, health, attack, defence, map) => {
   let character;
   let grid = 16;

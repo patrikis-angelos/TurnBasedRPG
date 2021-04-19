@@ -1,5 +1,3 @@
-import 'phaser';
-
 const map = (() => {
   const createMap = (scene) => {
     let map = scene.make.tilemap({ key: 'rpg_map' });

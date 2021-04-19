@@ -1,4 +1,3 @@
-import 'phaser';
 import Enemy from '../Objects/enemy';
 import Player from '../Objects/player';
 
@@ -51,10 +50,6 @@ const gameModule = (() => {
     if (defender.die()) {
       scene.map[battlePosition[1]][battlePosition[0]].occupied = false;
       return false;
-    }
-    if (!scene.player.getActive()) {
-      scene.scene.stop('UIScene');
-      scene.scene.start('Title');
     }
     return battlePosition;
   }

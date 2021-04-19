@@ -1,13 +1,13 @@
-import 'phaser';
 import bar from '../Modules/bar';
-import start from '../assets/buttons/start.png';
-import start_hover from '../assets/buttons/start-hover.png';
+import start from '../assets/buttons/button.png';
+import start_hover from '../assets/buttons/button_hover.png';
 import rpg_map from '../assets/map/rpg_map.json';
 import town from '../assets/map/tiles-map.png';
 import transparent_town from '../assets/map/transparent-bg-tiles.png';
 import warrior from '../assets/characters/icon_01.png';
 import spider from '../assets/enemies/icon_29.png';
 import coin from '../assets/icon_306.png';
+import '../assets/css/style.css';
 
 
 export default class PreloaderScene extends Phaser.Scene {

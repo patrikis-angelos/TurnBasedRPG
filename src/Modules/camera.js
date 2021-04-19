@@ -1,5 +1,3 @@
-import 'phaser';
-
 const camera = (() => {
   const setCamera = (player, scene) => {
     scene.cameras.main.setZoom(2);
