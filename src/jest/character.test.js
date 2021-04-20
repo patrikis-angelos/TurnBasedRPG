@@ -12,7 +12,6 @@ beforeAll(() => {
   }
   testCharacter = Character('warrior', 100, 5, 2, testMap)
   testCharacter.instantiate(8, 8, scene);
-  testMap[0][0].occupied = testCharacter.getName();
 });
 
 describe('updatePosition', ()=> {

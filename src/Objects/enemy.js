@@ -2,6 +2,7 @@ import Character from './character';
 
 const Enemy = (name, health, attack, defence, map) => {
   let healthBar;
+  let step = 16;
   const directions = [[0, 1], [0, -1], [1, 0], [-1, 0]];
   const {
     instantiate,
@@ -18,7 +19,6 @@ const Enemy = (name, health, attack, defence, map) => {
   } = Character(name, health, attack, defence, map);
 
   const randomMove = () => {
-    const step = 16;
     const enemy = getInstance();
     const available = [];
     directions.forEach((dir) => {
@@ -31,8 +31,9 @@ const Enemy = (name, health, attack, defence, map) => {
     const index = Math.floor(Math.random() * available.length);
     const nextMove = available[index];
     if (nextMove) {
-      makeMove(nextMove, step);
+      return nextMove;
     }
+    return false;
   };
 
   const createHealth = (scene) => {
@@ -66,7 +67,10 @@ const Enemy = (name, health, attack, defence, map) => {
     if (!getActive()) {
       return;
     }
-    randomMove();
+    let move = randomMove();
+    if(move) [
+      makeMove(move, step)
+    ]
     updateHealthPosition();
   };
 
@@ -82,6 +86,7 @@ const Enemy = (name, health, attack, defence, map) => {
     updateHealthBar,
     die,
     getHealth,
+    randomMove
   };
 };
 
