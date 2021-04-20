@@ -29,7 +29,7 @@ const form = (() => {
   const showForm = () => {
     const form = document.querySelector('form');
     form.classList.remove('hidden');
-  }
+  };
 
   const removeForm = (scene) => {
     const form = document.querySelector('form');

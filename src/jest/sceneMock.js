@@ -1,35 +1,35 @@
 const MockScene = () => {
-  let physics = {
+  const physics = {
     add: {
-      sprite: function(startX, startY, name){
+      sprite(startX, startY) {
         return {
-          setScale: function(){},
+          setScale() {},
           x: startX,
           y: startY,
-          setActive: function(){
+          setActive() {
             return {
-              setVisible: function(){}
-            }
-          }
-        }
-      }
-    }
-  }
+              setVisible() {},
+            };
+          },
+        };
+      },
+    },
+  };
 
-  let add = {
-    rectangle: function() {
+  const add = {
+    rectangle() {
       return {
-        setOrigin: function() {
+        setOrigin() {
           return {
-            setSize: function() {},
-          }
+            setSize() {},
+          };
         },
       };
-    }
-  }
+    },
+  };
 
 
-  return {physics, add};
-}
+  return { physics, add };
+};
 
 export default MockScene;

@@ -2,7 +2,7 @@ import Character from './character';
 
 const Enemy = (name, health, attack, defence, map) => {
   let healthBar;
-  let step = 16;
+  const step = 16;
   const directions = [[0, 1], [0, -1], [1, 0], [-1, 0]];
   const {
     instantiate,
@@ -67,10 +67,10 @@ const Enemy = (name, health, attack, defence, map) => {
     if (!getActive()) {
       return;
     }
-    let move = randomMove();
-    if(move) [
-      makeMove(move, step)
-    ]
+    const move = randomMove();
+    if (move) {
+      makeMove(move, step);
+    }
     updateHealthPosition();
   };
 
@@ -87,7 +87,7 @@ const Enemy = (name, health, attack, defence, map) => {
     die,
     getHealth,
     randomMove,
-    getActive
+    getActive,
   };
 };
 

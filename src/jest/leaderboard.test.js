@@ -1,25 +1,20 @@
 import leaderboards from '../Modules/leaderboards';
-import MockScene from './sceneMock';
 import 'regenerator-runtime/runtime';
 
-let scene = MockScene();
-
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({
-      result: [
-        {
-          user: 'Patrick',
-          score: 10
-        },
-        {
-          user: 'Guest',
-          score: 15
-        }
-      ]
-    }),
-  })
-);
+global.fetch = jest.fn(() => Promise.resolve({
+  json: () => Promise.resolve({
+    result: [
+      {
+        user: 'Patrick',
+        score: 10,
+      },
+      {
+        user: 'Guest',
+        score: 15,
+      },
+    ],
+  }),
+}));
 
 describe('loadScores', () => {
   it('loads the scores', async () => {

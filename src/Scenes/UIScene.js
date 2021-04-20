@@ -31,7 +31,15 @@ export default class UIScene extends Phaser.Scene {
 
     this.createUI(0, uiStartY, 800, uiHeight);
 
-    this.rect = this.player.createHealthBar(this, 20, uiStartY + 10, 380, 20, 0xff0000, this.sys.game.globals.playerName);
+    this.rect = this.player.createHealthBar(
+      this,
+      20,
+      uiStartY + 10,
+      380,
+      20,
+      0xff0000,
+      this.sys.game.globals.playerName,
+    );
 
     this.scoreText = this.createField(20, uiStartY + 70, 'Score', 0);
     this.createField(430, uiStartY + 10, 'Attack', this.player.getAttack());
