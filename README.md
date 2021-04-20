@@ -23,14 +23,14 @@ Move with: WASD keys.
 
 To get a local copy running
 
-`git clone git@github.com:patrick-angelos/TurnBasedRPG.git`
-`cd TurnBasedRPG`
-`npm install`
-`npm run start`
+- `git clone git@github.com:patrick-angelos/TurnBasedRPG.git`
+- `cd TurnBasedRPG`
+- `npm install`
+- `npm run start`
 
 To run the test
 
-`npm test`
+- `npm test`
 
 ## Author
 
