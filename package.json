@@ -45,6 +45,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "phaser": "^3.54.0"
+    "phaser": "^3.54.0",
+    "express": "^4.17.1"
   }
 }
