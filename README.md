@@ -8,6 +8,8 @@ You can submit your name before the game begins and compete for a high score.
 The UI on the game scene shows the stats of the player (Health, Attack, Defence).
 Although the attack and defense are not changing the idea was to increase them every few coins the player collected.
 
+Move with: WASD keys.
+
 ![](./screenshot/spiders.png)
 
 ## [Live Link](https://quizzical-aryabhata-55d239.netlify.app/)
