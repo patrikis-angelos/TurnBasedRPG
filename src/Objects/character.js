@@ -15,8 +15,9 @@ const Character = (name, health, attack, defence, map) => {
     if (!active) {
       return;
     }
-    x = x / grid - 0.5;
-    y = y / grid - 0.5;
+    if (!tileExists(x, y)) {
+      return;
+    }
     map[y][x].occupied = false;
     map[y + direction[1]][x + direction[0]].occupied = name;
   };
@@ -25,17 +26,26 @@ const Character = (name, health, attack, defence, map) => {
     if (!active) {
       return false;
     }
-    if (!map[y] || !map[y][x] || map[y][x].index > 0 || map[y][x].occupied) {
+    if (!tileExists(x, y) || map[y][x].index > 0 || map[y][x].occupied) {
       return false;
     }
     return true;
   };
 
-  const makeMove = (direction, value) => {
-    if (!character) {
+  const tileExists = (x, y) => {
+    if (!map[y] || !map[y][x]) {
       return false;
     }
-    updatePosition(character.x, character.y, direction);
+    return true;
+  }
+
+  const makeMove = (direction, value) => {
+    if (!active) {
+      return false;
+    }
+    let x = character.x / grid - 0.5;
+    let y = character.y / grid - 0.5;
+    updatePosition(x,  y, direction);
     character.y += direction[1] * value;
     character.x += direction[0] * value;
     return true;
@@ -48,6 +58,8 @@ const Character = (name, health, attack, defence, map) => {
   const getAttack = () => attack;
 
   const getDefence = () => defence;
+
+  const getName = () => name;
 
   const attackTarget = (target) => {
     if (!active) {
@@ -85,8 +97,10 @@ const Character = (name, health, attack, defence, map) => {
     getAttack,
     getDefence,
     getHealth,
+    getName,
     die,
     getActive,
+    updatePosition
   };
 };
 
