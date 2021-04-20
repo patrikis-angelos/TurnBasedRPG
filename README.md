@@ -3,7 +3,10 @@
 # Spiders
 
 Spiders is a turn-based, RPG where the goal of the game is to collect as many coins as you can on a farm full of spiders.
-Each time you collect a coin a new spider spawns on the farm. Compete with other players and see if you can claim a high score.
+Each time you collect a coin a new spider spawns on the farm.
+You can submit your name before the game begins and compete for a high score.
+The UI on the game scene shows the stats of the player (Health, Attack, Defence).
+Although the attack and defense are not changing the idea was to increase them every few coins the player collected.
 
 ![](./screenshot/spiders.png)
 
