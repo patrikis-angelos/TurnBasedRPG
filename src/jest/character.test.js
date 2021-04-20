@@ -11,7 +11,7 @@ beforeAll(() => {
     }
   }
   testCharacter = Character('warrior', 100, 5, 2, testMap)
-  testCharacter.instantiate(1, 2, scene);
+  testCharacter.instantiate(8, 8, scene);
   testMap[0][0].occupied = testCharacter.getName();
 });
 
@@ -65,7 +65,8 @@ describe('makeMove', () => {
   it('moves the sprite of the character given a direction and value', () => {
     testCharacter.makeMove([0, 1], 16);
     let sprite = testCharacter.getInstance();
-    expect(sprite.y).toBe(16);
+    //startY = 8 + 16 = 24
+    expect(sprite.y).toBe(24);
   });
   it('returns true if the move was made succesfully', () => {
     let move = testCharacter.makeMove([0, -1], 16);
@@ -81,7 +82,7 @@ describe('makeMove', () => {
 describe('attackTarget', () => {
   it('damages the target character', () => {
     let enemyCharacter = Character('warrior', 100, 5, 2, testMap);
-    enemyCharacter.instantiate(1, 2, scene);
+    enemyCharacter.instantiate(8, 8, scene);
     testCharacter.attackTarget(enemyCharacter);
     expect(enemyCharacter.getHealth()).toBeLessThan(100);
   });
@@ -108,7 +109,7 @@ describe('takeDamage', () => {
 describe('die', () => {
   it('return true if a character dies', () => {
     let dyingCharacter = Character('warrior', 2, 5, 2, testMap);
-    dyingCharacter.instantiate(1, 2, scene)
+    dyingCharacter.instantiate(8, 8, scene)
     dyingCharacter.takeDamage(10);
     let died = dyingCharacter.die();
     expect(died).toBe(true);

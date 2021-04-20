@@ -6,6 +6,9 @@ const Character = (name, health, attack, defence, map) => {
   const instantiate = (startX, startY, scene, scale = 1) => {
     character = scene.physics.add.sprite(startX, startY, name);
     character.setScale(scale);
+    let x = startX / grid - 0.5;
+    let y = startY / grid - 0.5;
+    map[y][x].occupied = name;
     active = true;
   };
 

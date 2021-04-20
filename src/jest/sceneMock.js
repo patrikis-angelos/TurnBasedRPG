@@ -1,13 +1,13 @@
 const MockScene = () => {
   let physics = {
     add: {
-      sprite: function(){
+      sprite: function(startX, startY, name){
         return {
           setScale: function(){
             return true;
           },
-          x: 0,
-          y: 0,
+          x: startX,
+          y: startY,
           setActive: function(){
             return {
               setVisible: function(){
