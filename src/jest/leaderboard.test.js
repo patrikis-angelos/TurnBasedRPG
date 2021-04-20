@@ -21,10 +21,6 @@ global.fetch = jest.fn(() =>
   })
 );
 
-beforeEach(() => {
-  fetch.mockClear();
-});
-
 describe('loadScores', () => {
   it('loads the scores', async () => {
     const scores = await leaderboards.loadScores();

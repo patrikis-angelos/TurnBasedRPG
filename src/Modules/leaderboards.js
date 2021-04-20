@@ -13,13 +13,13 @@ const leaderboards = (() => {
   }
 
   async function loadScores() {
-    const response = await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/zCQfAe3lAa63zVR1BjWS/scores', 
+    const response = await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/WLIEGiwTvWu1lAF6DphM/scores', 
     {mode: 'cors'})
     return response.json();
   }
 
   const saveScore = (name, score) => {
-    $.post('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/zCQfAe3lAa63zVR1BjWS/scores',
+    $.post('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/WLIEGiwTvWu1lAF6DphM/scores',
     {
       user: name,
       score: score,

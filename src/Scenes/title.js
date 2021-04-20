@@ -10,6 +10,8 @@ export default class TitleScene extends Phaser.Scene {
   create() {
     form.showForm();
     this.cameras.main.setBackgroundColor('#40b3e6');
+    const title = this.add.text(400, 100, 'Spiders').setOrigin(0.5, 0.5);
+    title.setScale(4);
 
     const startButton = SceneButton('start', 'Game');
     startButton.instantiate(400, 250, 'Start', this, 4);
