@@ -37,7 +37,7 @@ const leaderboards = (() => {
     }
   }
 
-  return {saveScore, displayScores}
+  return {saveScore, displayScores, loadScores}
 })();
 
 export default leaderboards;
