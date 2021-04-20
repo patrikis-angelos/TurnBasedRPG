@@ -8,7 +8,7 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   create() {
-    form.createForm();
+    form.showForm();
     this.cameras.main.setBackgroundColor('#40b3e6');
 
     const startButton = SceneButton('start', 'Game');

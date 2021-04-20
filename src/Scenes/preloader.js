@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import form from '../Modules/form';
 import bar from '../Modules/bar';
 import start from '../assets/buttons/button.png';
 import startHover from '../assets/buttons/button_hover.png';
@@ -43,6 +44,7 @@ export default class PreloaderScene extends Phaser.Scene {
     bar.removeBar(this, progressBar, progressBox, loadingText, percentText, assetText);
 
     // loading assets
+    form.createForm(this);
     this.load.image('start', start);
     this.load.image('start_hover', startHover);
     this.load.image('warrior', warrior);

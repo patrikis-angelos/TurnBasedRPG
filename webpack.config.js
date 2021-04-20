@@ -10,7 +10,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   devServer: {
-    contentBase: './src',
+    contentBase: './dist',
   },
   mode: 'development',
   module: {

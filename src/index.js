@@ -10,6 +10,8 @@ import score from './Scenes/scores';
 class Game extends Phaser.Game {
   constructor() {
     super(config);
+    let playerName = 'Guest';
+    this.globals = { playerName };
     this.scene.add('Boot', boot);
     this.scene.add('Preloader', preloader);
     this.scene.add('Title', title);

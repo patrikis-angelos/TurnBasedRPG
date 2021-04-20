@@ -90,9 +90,9 @@ const Player = (name, health, attack, defence, map) => {
     }
   };
 
-  const createHealthBar = (scene, x, y, w, h, color) => {
+  const createHealthBar = (scene, x, y, w, h, color, name) => {
     const margin = 30;
-    const healthText = scene.add.text(x, y, 'Health');
+    const healthText = scene.add.text(x, y, `${name}: Health`);
     healthText.setScale(1.5);
 
     scene.graphics.lineStyle(5, 0x000000);

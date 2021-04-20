@@ -5,6 +5,7 @@ import camera from '../Modules/camera';
 import gameModule from '../Modules/game';
 import gameLoop from '../Modules/gameLoop';
 import form from '../Modules/form';
+import leaderboards from '../Modules/leaderboards';
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -43,7 +44,7 @@ export default class GameScene extends Phaser.Scene {
 
 
   create() {
-    form.removeForm();
+    form.removeForm(this);
     this.graphics = this.add.graphics();
     const tiles = map.createMap(this);
     this.map = tiles.layers[1].data;
@@ -84,6 +85,7 @@ export default class GameScene extends Phaser.Scene {
         this.enemyTurn();
         // Checking if player died after the enemy attack
         if (!this.player.getActive()) {
+          leaderboards.saveScore(this.sys.game.globals.playerName, this.player.getScore());
           this.scene.stop('UIScene');
           this.scene.start('Score');
         }
