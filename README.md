@@ -1,6 +1,11 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# TurnBasedRPG
+# Spiders
+
+Spiders is a turn-based, RPG where the goal of the game is to collect as many coins as you can on a farm full of spiders.
+Each time you collect a coin a new spider spawns on the farm. Compete with other players and see if you can claim a high score.
+
+![](./screenshot/spiders.png)
 
 ## [Live Link](https://quizzical-aryabhata-55d239.netlify.app/)
 
@@ -10,6 +15,13 @@
 - Phaser
 
 ## Getting Started
+
+To get a local copy running
+
+`git clone git@github.com:patrick-angelos/TurnBasedRPG.git`
+`cd TurnBasedRPG`
+`npm install`
+`npm run start`
 
 ## Author
 
@@ -29,6 +41,8 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
+- To [Henrique Lazarini (7Soul1)](https://www.deviantart.com/7soul1) for his great collection of pixel art .
+- To Luis Zuno (@ansimuz) for his great map tiles.
 - To Microverse for their `README` template.
 
 ## 📝 [License]
