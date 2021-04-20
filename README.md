@@ -23,6 +23,10 @@ To get a local copy running
 `npm install`
 `npm run start`
 
+To run the test
+
+`npm test`
+
 ## Author
 
 👤 **Patrikis Angelos**
