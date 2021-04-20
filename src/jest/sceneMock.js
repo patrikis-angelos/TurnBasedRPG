@@ -3,16 +3,12 @@ const MockScene = () => {
     add: {
       sprite: function(startX, startY, name){
         return {
-          setScale: function(){
-            return true;
-          },
+          setScale: function(){},
           x: startX,
           y: startY,
           setActive: function(){
             return {
-              setVisible: function(){
-                return true;
-              }
+              setVisible: function(){}
             }
           }
         }
@@ -20,7 +16,20 @@ const MockScene = () => {
     }
   }
 
-  return {physics};
+  let add = {
+    rectangle: function() {
+      return {
+        setOrigin: function() {
+          return {
+            setSize: function() {},
+          }
+        },
+      };
+    }
+  }
+
+
+  return {physics, add};
 }
 
 export default MockScene;

@@ -48,8 +48,9 @@ export default class GameScene extends Phaser.Scene {
     this.graphics = this.add.graphics();
     const tiles = map.createMap(this);
     this.map = tiles.layers[1].data;
-
-    this.player = gameModule.createPlayer(100, 5, 2, this);
+    const staringX = 13 * 16 + 8;
+    const staringY = 34 * 16 + 8;
+    this.player = gameModule.createPlayer(staringX, staringY, 100, 5, 2, this);
     const playerInstance = this.player.getInstance();
     playerInstance.setDepth(2);
 

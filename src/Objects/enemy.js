@@ -86,7 +86,8 @@ const Enemy = (name, health, attack, defence, map) => {
     updateHealthBar,
     die,
     getHealth,
-    randomMove
+    randomMove,
+    getActive
   };
 };
 

@@ -7,13 +7,12 @@ const gameModule = (() => {
     spider.instantiate(x, y, scene);
     scene.enemies.push(spider);
     spider.createHealth(scene);
+    return spider;
   };
 
-  const createPlayer = (health, attack, defence, scene) => {
-    const staringX = 13 * 16 + 8;
-    const staringY = 34 * 16 + 8;
+  const createPlayer = (x, y, health, attack, defence, scene) => {
     const player = Player('warrior', health, attack, defence, scene.map);
-    player.instantiate(staringX, staringY, scene);
+    player.instantiate(x, y, scene);
     return player;
   };
 
