@@ -1,0 +1,14 @@
+.form {
+  position: absolute;
+  width: 200px;
+  top: 500px;
+  left: 285px;
+}
+
+.name {
+  width: 200px;
+}
+
+.hidden {
+  display: none;
+}
