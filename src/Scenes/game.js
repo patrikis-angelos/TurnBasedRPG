@@ -50,7 +50,7 @@ export default class GameScene extends Phaser.Scene {
     this.map = tiles.layers[1].data;
     const staringX = 13 * 16 + 8;
     const staringY = 34 * 16 + 8;
-    this.player = gameModule.createPlayer(staringX, staringY, 100, 5, 2, this);
+    this.player = gameModule.createPlayer(staringX, staringY, 1, 5, 2, this);
     const playerInstance = this.player.getInstance();
     playerInstance.setDepth(2);
 
@@ -86,9 +86,14 @@ export default class GameScene extends Phaser.Scene {
         this.enemyTurn();
         // Checking if player died after the enemy attack
         if (!this.player.getActive()) {
-          leaderboards.saveScore(this.sys.game.globals.playerName, this.player.getScore());
+          const { playerName } = this.sys.game.globals;
+          const submit = leaderboards.saveScore(playerName, this.player.getScore());
           this.scene.stop('UIScene');
-          this.scene.start('Score');
+          submit.then(() => {
+            this.scene.start('Score');
+          }).catch(() => {
+            this.scene.start('Game');
+          });
         }
       } else if (this.battleCooldown >= 15 && !this.playerAttack) {
         this.playerTurn();

@@ -1,3 +1,5 @@
+import 'regenerator-runtime/runtime';
+
 const leaderboards = (() => {
   const compare = (a, b) => {
     const scoreA = parseInt(a.score, 10);
@@ -10,7 +12,7 @@ const leaderboards = (() => {
     return 0;
   };
 
-  async function loadScores() {
+  const loadScores = async () => {
     try {
       const response = await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/WLIEGiwTvWu1lAF6DphM/scores',
         { mode: 'cors' });
@@ -18,17 +20,23 @@ const leaderboards = (() => {
     } catch (error) {
       return null;
     }
-  }
-
-  const saveScore = (name, score) => {
-    $.post('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/WLIEGiwTvWu1lAF6DphM/scores', // eslint-disable-line
-      {
-        user: name,
-        score,
-      });
   };
 
-  async function displayScores(scene) {
+  const saveScore = async (name, score) => {
+    try {
+      let submitted;
+      submitted = $.post('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/WLIEGiwTvWu1lAF6DphM/scores', // eslint-disable-line
+        {
+          user: name,
+          score,
+        });
+      return submitted;
+    } catch (error) {
+      return false;
+    }
+  };
+
+  const displayScores = async (scene) => {
     try {
       const scores = await loadScores();
       const { result } = scores;
@@ -40,9 +48,9 @@ const leaderboards = (() => {
       }
       return true;
     } catch (error) {
-      return null;
+      return false;
     }
-  }
+  };
 
   return { saveScore, displayScores, loadScores };
 })();
