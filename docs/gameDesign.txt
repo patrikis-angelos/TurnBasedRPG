@@ -23,7 +23,7 @@ When in battle the player and enemies cannot move and the player starts an attac
 The enemy will take damage equal to the players' attack minus his defense.
 Then the enemy will attack and the battle will continue in a loop until the player or the enemy is dead.
 
-score
+Score
 The player can increase his score by collecting coins.
 At the start of the game, there is a coin in a random location of the map.
 When the player collects a coin another coin and a spider appear on a random location of the map.
