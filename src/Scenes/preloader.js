@@ -11,7 +11,6 @@ import spider from '../assets/enemies/icon_29.png';
 import coin from '../assets/icon_306.png';
 import '../assets/css/style.css';
 
-
 export default class PreloaderScene extends Phaser.Scene {
   constructor() {
     super('Preloader');

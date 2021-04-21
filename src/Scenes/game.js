@@ -42,7 +42,6 @@ export default class GameScene extends Phaser.Scene {
     this.playerAttack = true;
   }
 
-
   create() {
     form.removeForm(this);
     this.graphics = this.add.graphics();

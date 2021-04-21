@@ -28,7 +28,6 @@ const MockScene = () => {
     },
   };
 
-
   return { physics, add };
 };
 
