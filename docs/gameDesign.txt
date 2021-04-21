@@ -1,0 +1,39 @@
+Spiders
+
+- Original Thoughts
+
+A turned based, RPG game where players and enemies move in turns 
+and the player has no immediate effect on the combat.
+The player and the enemies will have at least health, attack, and defense attributes.
+The player will be able to upgrade these attributes while the game progresses.
+When an enemy and the player come close enough an automatic battle sequence will begin.
+
+
+- Game Mechanics
+
+The game right now is an early version of what I wanted to build.
+
+Movement
+The player can move on a 16x16 grid map and for every move of the player, each enemy does a random move.
+The player can move around with the WASD keys.
+
+Battle
+If an enemy is on any neighbor tile of the player battle will begin.
+When in battle the player and enemies cannot move and the player starts an attack.
+The enemy will take damage equal to the players' attack minus his defense.
+Then the enemy will attack and the battle will continue in a loop until the player or the enemy is dead.
+
+score
+The player can increase his score by collecting coins.
+At the start of the game, there is a coin in a random location of the map.
+When the player collects a coin another coin and a spider appear on a random location of the map.
+
+Game Over
+When the player loses all his health the game ends, your score is submitted and you go to the leaderboard screen.
+If for any reason the submission fails then you will go back to the title screen.
+
+- Future additions
+
+Right now the attack and defense attributes are always the same and the player cannot change them in any way in the game.
+In the future, I will try to add more attributes and items that increase those attributes.
+The items will probably drop from the enemies or you will get a choice of an item every few coins you collect.

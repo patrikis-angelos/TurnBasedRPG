@@ -91,7 +91,7 @@ export default class GameScene extends Phaser.Scene {
           submit.then(() => {
             this.scene.start('Score');
           }).catch(() => {
-            this.scene.start('Game');
+            this.scene.start('Title');
           });
         }
       } else if (this.battleCooldown >= 15 && !this.playerAttack) {

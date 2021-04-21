@@ -10,7 +10,7 @@ Although the attack and defense are not changing the idea was to increase them e
 
 Move with: WASD keys.
 
-![](./screenshot/spiders.png)
+![](./docs/spiders.png)
 
 ## [Live Link](https://quizzical-aryabhata-55d239.netlify.app/)
 
