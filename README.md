@@ -10,6 +10,8 @@ Although the attack and defense are not changing the idea was to increase them e
 
 Move with: WASD keys.
 
+For more detailed info check the [game design](./docs/gameDesign.txt) fiel
+
 ![](./docs/spiders.png)
 
 ## [Live Link](https://quizzical-aryabhata-55d239.netlify.app/)
