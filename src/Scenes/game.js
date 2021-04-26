@@ -49,17 +49,22 @@ export default class GameScene extends Phaser.Scene {
     this.map = tiles.layers[1].data;
     const staringX = 13 * 16 + 8;
     const staringY = 34 * 16 + 8;
+
+    //Player Creation
     this.player = gameModule.createPlayer(staringX, staringY, 100, 5, 2, this);
     const playerInstance = this.player.getInstance();
     playerInstance.setDepth(2);
+    //Player Creation
 
     camera.setCamera(playerInstance, this);
     this.movementKeys();
 
     this.enemies = [];
 
+    //Enemy Creation
     const spiderPosition = gameModule.pickRandomLocation(this);
     gameModule.createSpider(spiderPosition.x, spiderPosition.y, 20, 5, 1, this);
+    //Enemy Creation
 
     const coinPosition = gameModule.pickRandomLocation(this);
     const coin = this.physics.add.sprite(coinPosition.x, coinPosition.y, 'coin');
